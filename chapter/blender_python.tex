@@ -1,0 +1,2090 @@
+\chapter{Blender python}
+
+\section{GameLogic Module}
+
+\subsection{expandPath}
+
+\begin{verbatim}
+expandPath(include)
+Expands the path to include the directory of the blend that was opened.
+
+include:
+Type:  string
+           "//" = expands path to include the directory of the blend opened.
+
+Note:
+You can include subdirectories by using ("//" + "subdir_name\\")
+
+Sample Code
+
+# get the path to the blend directory
+mainDir = GameLogic.expandPath("//")
+
+# get path to subdirectory named Sound
+soundDirectory = mainDir + "Sound\\"
+
+# get path to scream.wav
+screamPath = (soundDirectory + "scream.wav")
+\end{verbatim}
+
+
+\subsection{getAverageFrameRate}
+
+\begin{verbatim}
+getAverageFrameRate()
+
+Returns the estimated frames per second
+
+Return type:   float
+Sample Code
+
+# get the FPS
+fps = GameLogic.getAverageFrameRate()
+\end{verbatim}
+
+\subsection{getBlendFileList}
+\begin{verbatim}
+getBlendFileList(dirPath)
+
+Returns a list of the blend files in a directory.
+
+Return type:  List [ string ]
+
+dirPath:
+Type:  string
+
+Note:
+Works the same as expandPath.
+
+Note:  
+Leaving dirPath blank -- ie. GameLogic.getBlendFileList() -- returns a list of the blend files in the same directory as the open blend.
+
+Sample Code
+# get a list of the blends in the same directory as open blend
+blendList = GameLogic.getBlendFileList("//")
+
+# get a list of the blends in subDirectory Data
+dataBlendList = GameLogic.getBlendFileList("//" + "Data\\")
+
+# get list of the blends in C:\MyGames\Blender
+gameBlends = GameLogic.getBlendFileList("C:\\MyGames\\Blender\\")
+\end{verbatim}
+
+\subsection{getCurrentController}
+\begin{verbatim}
+getCurrentController()
+Returns the controller logic brick that this python script is attached to.
+
+Return type:
+SCA_PythonController
+Sample Code
+
+# get the controller
+controller = GameLogic.getCurrentController()
+\end{verbatim}
+
+
+\subsection{getCurrentScene}
+\begin{verbatim}
+getCurrentScene()
+
+Returns the current scene
+
+Return type:
+KX_Scene
+Sample Code
+
+# get current scene
+scene = GameLogic.getCurrentScene()
+\end{verbatim}
+
+
+\subsection{getLogicTicRate}
+\begin{verbatim}
+
+getLogicTicRate()
+
+Returns how many times per second the logic bricks sensors are being checked/fired.  
+
+The default is 60 times per second (60 Hz)
+
+Return type:
+float number
+Sample Code
+
+# get the logic tic rate
+ticRate = GameLogic.getLogicTicRate()
+\end{verbatim}
+
+\subsection{getMaxLogicFrame}
+
+\begin{verbatim}
+getMaxLogicFrame()
+
+Returns the number of logic frames executed per render frame.
+
+Return type:  integer
+
+Range:  1 - 5
+
+Note:
+The default is 5 logic frames executed per render frame.
+Sample Code
+
+# get the max logic frame 
+maxLogic = GameLogic.getMaxLogicFrame()
+\end{verbatim}
+
+\subsection{getPhysicsTicRate}
+
+\begin{verbatim}
+getPhysicsTicRate()
+
+Returns how many times per second the scene's physics are being updated.  
+
+Return type:  float 
+
+Note:
+Always returns 0.0
+Sample Code
+
+# get the physics tic rate
+ticRate = GameLogic.getPhysicsTicRate()
+\end{verbatim}
+
+\subsection{getRandomFloat}
+
+\begin{verbatim}
+getRandomFloat()
+
+Returns a random float number between 0.0 and 1.0
+
+Return type:  float
+Sample Code
+
+# get a random number to use as a seed
+seed = GameLogic.getRandomFloat()
+\end{verbatim}
+
+\subsection{getSceneList}
+\begin{verbatim}
+getSceneList()
+
+Returns a list of the active scenes
+
+Returns: list[ KX_Scene ]
+Sample Code
+
+activeScenes = GameLogic.getSceneList()
+\end{verbatim}
+
+\subsection{getSpectrum}
+\begin{verbatim}
+getSpectrum()
+
+Returns a 512 point list from the sound card
+
+This is from the official documentation
+
+Returns: list[float]
+
+len(getSpectrum()) == 512
+
+Note:
+This only works if the fmod sound driver is being used.
+Sample Code
+
+None
+\end{verbatim}
+
+\subsection{PrintGLInfo}
+\begin{verbatim}
+PrintGLInfo()
+
+Prints the following information about OpenGL extensions to the Blender 3D console window.
+
+Supported Extensions...
+GL_ARB_shader_objects supported?
+GL_ARB_vertex_objects supported?
+--------- Details -----------
+Max uniform components
+Max varying floats
+Max vertex texture units
+Max combined texture units
+
+GL_ARB_fragment_shader supported?
+---------- Details -----------
+Max uniform components
+
+GL_ARB texture_cube_map supported?
+----------- Details ----------
+Max cubemap size
+
+GL_ARB_multitexture supported?
+----------- Details -----------
+Max texture units available
+
+GL_ARB_texture_env_combine supported?
+Sample Code
+
+#Print info about OpenGL extensions
+GameLogic.PrintGLInfo()
+\end{verbatim}
+
+
+\subsection{sendMessage}
+\begin{verbatim}
+sendMessage(subject, body, to, from)
+
+Sends a message to a sensor 
+
+subject:
+The subject of the message
+Type:  String
+body:
+The body of the message (optional)
+Type:  String
+to:
+The name of the object to send the message to (optional)
+Type:  String
+from: 
+The name of the object that the message is coming from (optional)
+Type:  String
+Sample Code
+
+# send message to Cube
+GameLogic.sendMessage("Rotate", "none", "OBCube", "OBSuzanne")
+\end{verbatim}
+
+\subsection{setGravity}
+\begin{verbatim}
+setGravity(gravity)
+
+Sets the world gravity using the world x, y and z axis.
+
+gravity:
+Type:  list [ x, y, z]
+Sample Code
+
+# set the gravity to 10 (-z axis direction)
+GameLogic.setGravity([ 0.0, 0.0, -10.0])
+\end{verbatim}
+
+\subsection{setLogicTicRate}
+\begin{verbatim}
+setLogicTicRate(ticRate)
+
+Sets how many times per second the logic brick sensors are checked/fired.  
+
+The default is 60 times per second (60 Hz)
+
+ticRate:
+Type:  float number
+Sample Code
+
+# set the logic tic rate to 100
+GameLogic.setLogicTicRate(100.0)
+\end{verbatim}
+
+\subsection{setMaxLogicFrame}
+\begin{verbatim}
+setMaxLogicFrame(logicRate)
+
+Note:
+The default is 5 logic frames executed per render frame.
+
+Sets the number of logic frames executed per render frame.
+
+logicRate
+Type:  integer
+
+Range:  1 - 5
+Sample Code
+
+# set max logic frame to 4
+GameLogic.setMaxLogicFrame(4)
+\end{verbatim}
+
+\subsection{setMaxPhysicsFrame}
+\begin{verbatim}
+setMaxPhysicsFrame(physicsRate)
+
+Sets the number of physics frames executed per render frame.
+
+physicsRate
+Type:  integer
+
+Range:  1 - 5
+Sample Code
+
+# set max physics frame to 4
+GameLogic.setMaxPhysicsFrame(4)
+\end{verbatim}
+
+\subsection{setPhysicsTicRate}
+\begin{verbatim}
+setPhysicsTicRate(ticRate)
+
+Sets how many times per second the scene's physics are being updated.  
+
+The default is 60 times per second (60 Hz)
+
+ticRate:
+Type:  float number
+
+Note:
+Doesn't work
+Sample Code
+
+# set the physics tic rate to 120
+GameLogic.setPhysicsTicRate(120.0)
+\end{verbatim}
+
+\subsection{stopDSP}
+\begin{verbatim}
+stopDSP()
+
+Stops the sound driver using DSP effects
+
+Note:
+This only works if the fmod sound driver is being used.
+Sample Code
+
+None
+\end{verbatim}
+
+
+\subsection{globalDict}
+
+\begin{verbatim}
+globalDict
+
+Stores/saves the name and values of variables so they can be passed between scenes.
+
+Note:
+This is the Blender version of a python dictionary.  
+
+Note:
+A dictionary is a python data structure.  Different types (float, integer, string, dictionary, etc) of data can be stored in the same dictionary.
+Sample Code
+
+#create a dictionary for player 1 stats
+player1_Stats = {  "Health" : 80,
+"Armor" : 30,
+"Class" : "Cleric"  }
+                
+#create a dictionary for player 2 stats
+player2_Stats = {  "Health" : 60,
+"Armor" : 90,
+"Class" : "Warrior"  }
+
+# save player 1 and player 2 dictionarys to the globalDict
+GameLogic.globalDict["player1"] = player1_Stats 
+GameLogic.globalDict["player2"] = player2_Stats
+
+# get player 1 stats from the globalDict
+player1_stats = GameLogic.globalDict.get("player1")
+
+# get player 2 stats from the globalDict
+player2_stats = GameLogic.globalDict.get("player2")
+\end{verbatim}
+
+
+%\section{Mathutils Module}
+
+
+
+\subsection{AngleBetweenVecs}
+\begin{verbatim}
+AngleBetweenVecs(vec1, vec2)
+Returns the angle between two vectors
+
+Return Type:  Angle (in degrees)
+
+vec1:
+A 2D or 3D Vector 
+vec2:
+A 2D or 3D Vector 
+Sample Code
+# import mathutils
+import Mathutils
+
+# create 1st vector 
+vec1 = Mathutils.Vector(1.0, 0.0, 0.0)
+
+# create 2nd vector 
+vec2 = Mathutils.Vector(0.0, 0.0, 1.0)
+
+# find angle between two
+ang = Mathutils.AngleBetweenVecs(vec1, vec2)
+\end{verbatim}
+
+\subsection{CrossQuats}
+\subsection{CrossVecs}
+\subsection{CrossQuats}
+\begin{verbatim}
+CrossQuats(quat1, quat2)
+
+Return the cross product of two quaternions.
+
+Return Type:  Quaternion
+
+quat1:
+Type:  Quaternion 
+quat2
+Type:  Quaternion 
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st Quaternion 
+quat1= Mathutils.Quaternion(1.0, 2.0 ,3.0 ,4.0 )
+
+# create 2nd Quaternion 
+quat2= Mathutils.Quaternion(5.0, 6.0 ,7.0 ,8.0 )
+
+# use cross product to create a new Quaternion 
+quatCross = Mathutils.CrossQuats(quat1, quat2)
+\end{verbatim}
+
+\subsection{DifferenceQuats}
+\begin{verbatim}
+DifferenceQuats(quat1, quat2)
+Returns the rotational difference between the two quaternions. 
+
+Return Type:  Quaternion
+
+quat1:
+Type:  Quaternion 
+quat2
+Type:  Quaternion 
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st Quaternion 
+quat1= Mathutils.Quaternion(1.0, 2.0 ,3.0 ,4.0 )
+
+# create 2nd Quaternion 
+quat2= Mathutils.Quaternion(5.0, 6.0 ,7.0 ,8.0 )
+
+# get the rotational difference
+quatRotDiff = Mathutils.DifferenceQuats(quat1, quat2)
+\end{verbatim}
+
+\subsection{DotQuats}
+\begin{verbatim}
+DotQuats(quat1, quat2)
+
+Returns the scalar product of quaternion muliplication.
+
+Return Type: float
+
+quat1:
+Type:  Quaternion 
+quat2
+Type:  Quaternion 
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st Quaternion 
+quat1= Mathutils.Quaternion(1.0, 2.0 ,3.0 ,4.0 )
+
+# create 2nd Quaternion 
+quat2= Mathutils.Quaternion(5.0, 6.0 ,7.0 ,8.0 )
+
+# use DotQuats
+quatDot = Mathutils.DotQuats(quat1, quat2)
+\end{verbatim}
+
+\subsection{DotVecs}
+\begin{verbatim}
+DotVecs(vec1, vec2)
+
+Returns scalar product of vector muliplication.
+
+Return Type:  float
+
+vec1:
+Type:   a 2D, 3D or 4D Vector)
+vec2
+Type:   a 2D, 3D or 4D Vector)
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st vector 
+vec1 = Mathutils.Vector(1.0, 0.0, 0.0)
+
+# create 2nd vector 
+vec2 = Mathutils.Vector(0.0, 0.0, 1.0)
+
+# use DotVecs
+vecDot = Mathutils.DotVecs(vec1, vec2)
+\end{verbatim}
+
+
+\subsection{Intersect}
+\begin{verbatim}
+Intersect(vec1, vec2, vec3, ray, orig, clip)
+Note:
+Returns None if the ray doesn't intersect the triangle.
+
+Returns the intersection between a ray and a triangle, if possible, return None otherwise.
+
+Return Type:  Vector
+
+vec1
+Type:  3D Vector  (1st corner of the triangle)
+vec2
+Type:  3D Vector  (2nd corner of the triangle)
+vec3
+Type:  3D Vector  (3rd corner of the triangle)
+ray
+Type:  3D Vector 
+   The orientation of the ray. The length of the ray is not used
+orig
+ Type:  3D Vector
+   The origin of the ray.
+clip 
+Type:  integer 
+   0 = don't restrict the intersection to the area of the triangle
+ (Use the infinite plane defined by the triangle.)
+   1 = restrict to intersection with triangle area
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st vector for 1st corner
+vec1 = Mathutils.Vector( 0.0, 0.0, 0.0)
+
+# create 2nd vector for 2nd corner
+vec2 = Mathutils.Vector (6.0, 0.0, 0.0)
+
+# create 3rd vector for 3rd corner
+vec3 = Mathutils.Vector( 0.0, 0.0, 6.0)
+
+# create ray vector 
+ray = Mathutils.Vector( 0.0, 1.0, 0.0)
+
+# create origin vector
+orig = Mathutils.Vector(2.0, -2.0, 2.0)
+
+# get intersection for an infinite plane
+vecIntersect = Mathutils.Intersect(vec1, vec2, vec3, ray, orig, 0)
+\end{verbatim}
+
+\subsection{LineIntersect}
+\begin{verbatim}
+LineIntersect(vec1, vec2, vec3, vec4)
+
+Note:
+Because the lines are evaluated as infinite lines in space, the values returned may not be between the 2 points given for each line.
+
+Returns a tuple with the points on each line respectively closest to the other (when both lines intersect, both vector hold the same value). 
+
+Return Type:  ([Vector], [Vector])
+
+vec1
+A 3d vector, one point on the first line
+Type:  Vector
+vec2 
+A 3d vector, another point on the first line
+Type:  Vector
+vec3
+A 3d vector, one point on the second line
+Type:  Vector
+vec4
+A 3d vector, another point on the second line
+Type:  Vector
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st vector for 1st point on 1st line
+vec1 = Mathutils.Vector(0.0, 0.0, 0.0)
+
+# create 2nd vector for 2nd point on 1st line
+vec2 = Mathutils.Vector(5.0, 0.0, 0.0)
+
+# create 1st vector for 1st point on 2nd line
+vec3 = Mathutils.Vector(2.0, -2.0, 0.0)
+
+# create 2nd vector for 2nd point on 2nd line
+vec4 = Mathutils.Vector(2.0, 2.0, 0.0)
+
+# get line intersect
+lineIntersect = Mathutils.LineIntersect(vec1, vec2, vec3, vec4)
+\end{verbatim}
+
+\subsection{MidpointVecs}
+\begin{verbatim}
+MidpointVecs(vec1, vec2)
+
+Returns a vector to the midpoint between two vectors.
+
+Return Type:  Vector
+
+vec1:
+Type:   a 2D, 3D or 4D Vector)
+vec2
+Type:   a 2D, 3D or 4D Vector)
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st vector 
+vec1 = Mathutils.Vector(1.0, 0.0, 0.0)
+
+# create 2nd vector 
+vec2 = Mathutils.Vector(0.0, 0.0, 1.0)
+
+# use MidpointVecs
+vecMid = Mathutils.MidpointVecs(vec1, vec2)
+\end{verbatim}
+
+\subsection{OrthoProjectionMatrix}
+\begin{verbatim}
+OrthoProjectionMatrix(plane, matSize, axis)
+
+Returns a matrix that represents an orthographic projection
+
+Return Type: Matrix
+
+plane
+Type:  string
+  "x"   = x projection 2D
+  "y"   = y projection 2D
+  "xy" = xy projection
+  "xz" = xz projection
+  "yz" = yz projection
+  "r"   = arbitrary projection plane
+matSize
+Type:  integer
+  The size of the projection matrix to construct. Can be 2D, 3D, or 4D.
+axis  (optional -- The arbitrary axis used with the "R" plane type)
+Type: Vector
+  Arbitrary perpendicular plane vector.
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create a 2D Matrix
+orthoMatrix = Mathutils.OrthoProjectionMatrix("x" , 2)
+
+# create a 3D Matrix
+orthoMatrix = Mathutils.OrthoProjectionMatrix("xy" , 3)
+\end{verbatim}
+
+\subsection{ProjectVecs}
+\begin{verbatim}
+ProjectVecs(vec1, vec2)
+Returns the parallel projection vector (the projection of vec1 onto vec2).
+
+Return Type:  Vector
+
+vec1:
+Type:   a 2D, 3D or 4D Vector)
+vec2
+Type:   a 2D, 3D or 4D Vector)
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st vector 
+vec1 = Mathutils.Vector(1.0, 0.0, 0.0)
+
+# create 2nd vector 
+vec2 = Mathutils.Vector(0.0, 0.0, 1.0)
+
+# use ProjectVecs
+vecProject= Mathutils.ProjectVecs(vec1, vec2)
+\end{verbatim}
+
+
+\subsection{QuadNormal}
+\begin{verbatim}
+QuadNormal(vec1, vec2, vec3, vec4)
+Returns the normal of the 3D quad defined.
+
+Return Type:  Vector
+
+vec1:
+Type:   3D Vector  
+    (the 1st vertex of the quad)
+vec2
+Type:   3D  Vector
+    (the 2nd vertex of the quad)
+vec3:
+Type:   3D Vector  
+    (the 3rd vertex of the quad)
+vec4
+Type:   3D  Vector
+    (the 4thvertex of the quad)
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st Vector for the vertex
+vec1= Mathutils.Vector(0.0, 0.0, 0.0)
+
+# create 2nd Vector for 2nd vertex
+vec2= Mathutils.Vector(1.0, 0.0, 0.0)
+
+# create 3rd Vector for the 3rd vertex
+vec3= Mathutils.Vector(1.0, 0.0, 1.0)
+
+# create 4th Vector for 4th vertex
+vec4= Mathutils.Vector(0.0, 0.0, 1.0)
+
+# use QuadNormal
+quadNormal = Mathutils.QuadNormal(vec1, vec2, vec3, vec4)
+\end{verbatim}
+
+\subsection{Rand}
+\begin{verbatim}
+Rand(low, high)
+Return a random number between 0.0 and 1.0
+
+Return Type:  float
+
+low
+Type:  float
+Range:  0.0 - 1.0
+lhigh
+Type:  float
+Range:  0.0 - 1.0
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create random number between 0.0 and 0.8
+randNum = Mathutils.Rand(0.0, 0.8)
+\end{verbatim}
+
+
+\subsection{rotate}
+\begin{verbatim}
+rotate(angle, axis)
+
+Rotates a euler by a fixed amount of degrees around an axis.
+
+angle  (degrees to rotate)
+Type:  float) 
+axis   (axis to rotate around)
+Type:  string
+  "x" or "y" or  "z"
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create a Euler object
+euler = Mathutils.Euler(45,0,0)
+
+# rotate euler 90 degrees around the x axis
+euler.rotate( 90.0, "x")
+\end{verbatim}
+
+
+\subsection{RotationMatrix}
+\begin{verbatim}
+RotationMatrix(angle, matSize, axisFlag, axis)
+
+Creates a matrix representing a rotation.
+
+Returns Type:  Matrix
+
+angle  (The angle of rotation desired)
+Type:  float) 
+
+matSize  (The size of the rotation matrix to construct. Can be 2x2, 3x3, or 4x4)
+Type:  Integer
+
+axisFlag
+Type:  string
+  "x" = x-axis rotation
+  "y" = y-axis rotation
+  "z" = z-axis rotation"
+  "r" =  arbitrary rotation around vector
+
+axis:  (optional -- The arbitrary axis of rotation used with the "R" axisFlag)
+Type=Vector 
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# use RotationMatrix
+matrixNew = Mathutils.RotationMatrix(90.0, 3, "x")
+\end{verbatim}
+
+\subsection{ScaleMatrix}
+\begin{verbatim}
+ScaleMatrix(factor, matSize, axis)
+Creates a matrix representing a scaling.
+
+Return Type:  Matrix
+
+factor
+The factor of scaling to apply.
+Type:  float 
+
+matSize 
+The size of the scale matrix. Can be 2x2, 3x3, or 4x4.
+Type:  integer 
+
+axis  (optional)
+Direction to influence scale
+Type:  Vector
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create a 3x3 Scale Matrix
+matrixScale = Mathutils.ScaleMatrix(2.0, 3)
+\end{verbatim}
+
+
+\subsection{ShearMatrix}
+\begin{verbatim}
+ShearMatrix(plane, factor, matSize)
+
+Creates a matrix to represent an orthographic projection
+
+Return Type:  Matrix
+
+plane
+Type:  string
+  "x"   = x shear (2D)
+  "y"   = y shear (2D)
+  "xy" = xy shear
+  "xz" = xz shear
+  "yz" = yz shear
+
+factor 
+The factor of shear to apply.
+Type:  float  
+
+matSize
+The size of the projection matrix to construct. Can be 2x2, 3x3, or 4x4.
+Type:  integer
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 3x3 ShearMatrix
+matrixShear = Mathutils.ShearMatrix("xy", 2.0, 3)
+\end{verbatim}
+
+\subsection{Slerp}
+\begin{verbatim}
+Slerp(quat1, quat2, factor)
+Returns the interpolation of two quaternions.
+
+Return Type:  Quaternion
+
+quat1:
+Type:  Quaternion 
+quat2
+Type:  Quaternion 
+factor
+The interpolation value
+Type:  float 
+Range:  0.0 - 1.0
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st Quaternion 
+quat1= Mathutils.Quaternion(1.0, 2.0 ,3.0 ,4.0 )
+
+# create 2nd Quaternion 
+quat2= Mathutils.Quaternion(5.0, 6.0 ,7.0 ,8.0 )
+
+# use Slerp
+quatInterpolation = Mathutils.Slerp(quat1, quat2, 2.0)
+\end{verbatim}
+
+\subsection{TranslationMatrix}
+\begin{verbatim}
+TranslationMatrix(vec)
+
+Creates a indentity matrix representing a translation
+
+Return Type:  Matrix
+
+vec
+ The translation vector
+Type:  Vector
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create vector 
+vec = Mathutils.Vector(1.0, 0.0, 0.0)
+ 
+# use TranslationMatrix
+matrixTranslation = Mathutils.TranslationMatrix(vec)
+\end{verbatim}
+
+
+\subsection{TriangleArea}
+\begin{verbatim}
+TriangleArea(vec1, vec2, vec3)
+Returns the area size of a 2D or 3D triangle.
+
+Return Type:  float
+
+vec1
+Type:  2D or 3D Vector  (1st corner of the triangle)
+vec2
+Type:  2D or 3D Vector  (2nd corner of the triangle)
+vec3
+Type:  2D or 3D Vector  (3rd corner of the triangle)
+Sample Code
+# import Mathutils
+import Mathutils
+
+# create 1st vector for 1st corner
+vec1 = Mathutils.Vector( 0.0, 0.0, 0.0)
+
+# create 2nd vector for 2nd corner
+vec2 = Mathutils.Vector (1.0, 0.0, 0.0)
+
+# create 3rd vector for 3rd corner
+vec3 = Mathutils.Vector( 0.0, 0.0, 1.0)
+
+# get triangle area
+triArea = Mathutils.TriangleArea(vec1, vec2, vec3)
+\end{verbatim}
+
+
+\subsection{TriangleNormal}
+
+\begin{verbatim}
+TriangleNormal(vec1, vec2, vec3)
+
+Returns the normal of the 3D triangle defined.
+
+Return Type:  Vector
+
+vec1
+Type:  3D Vector  (1st corner of the triangle)
+vec2
+Type:  3D Vector  (2nd corner of the triangle)
+vec3
+Type:  3D Vector  (3rd corner of the triangle)
+Sample Code
+
+# import Mathutils
+import Mathutils
+
+# create 1st vector for 1st corner
+vec1 = Mathutils.Vector( 0.0, 0.0, 0.0)
+
+# create 2nd vector for 2nd corner
+vec2 = Mathutils.Vector (1.0, 0.0, 0.0)
+
+# create 3rd vector for 3rd corner
+vec3 = Mathutils.Vector( 0.0, 0.0, 1.0)
+
+# get triangle Normal
+triNormal = Mathutils.TriangleNormal(vec1, vec2, vec3)
+\end{verbatim}
+
+%\section{Rasterizer Module}
+
+\subsection{drawLine}
+
+\begin{verbatim}
+
+Draws a line.
+
+start:
+  Type:    List [ x, y, z]
+
+x =  x world coordinate
+Type: float
+y =  y world coordinate
+Type: float
+z =  z world coordinate
+Type: float
+
+end:
+  Type:    List [ x, y, z]
+
+x =  x world coordinate
+Type: float
+y =  y world coordinate
+Type: float
+z =  z world coordinate
+Type: float
+
+color:
+  Type:    List [ r, g, b]
+
+r =  red color value
+Type: float
+range: 0.0 - 1.0
+g =  green color value
+Type: float
+range: 0.0 - 1.0
+b =  blue color value
+Type: float
+range: 0.0 - 1.0
+
+Note:
+Line isn't permanent.  It has to be redrawn every time the frame is redrawn.    
+Sample Code
+# import Rasterizer
+import Rasterizer
+
+# draw a  red line
+start = [0.0, 0.0, 0.0]
+end = [100.0, 100.0, 5.0]
+color = [ 1.0, 0.0, 0.0]
+
+# draw it
+Rasterizer.drawLine( start, end, color)
+\end{verbatim}
+
+\subsection{getMaterialMode}
+\begin{verbatim}
+getMaterialMode()
+
+Returns the material mode being used.
+
+Return Type:  integer
+
+0 = KX_TEXFACE_MATERIAL
+1 = KX_BLENDER_MULTITEX_MATERIAL 
+2 = KX_BLENDER_GLSL_MATERIAL 
+Sample Code
+
+# import Rasterizer
+import Rasterizer
+
+# get material mode
+mode = Rasterizer.getMaterialMode()
+\end{verbatim}
+
+\subsection{getWindowHeighte}
+\begin{verbatim}
+getWindowHeight()
+
+Returns the height of the game window in pixels
+
+Return type:  integer
+Sample Code
+
+# import Rasterizer
+import Rasterizer
+
+# get game window height
+height = Rasterizer.getWindowHeight()
+\end{verbatim}
+
+
+\subsection{getWindowWidth}
+\begin{verbatim}
+getWindowWidth()
+
+Returns the width of the game window in pixels
+
+Return type:  integer
+Sample Code
+
+# import Rasterizer
+import Rasterizer
+
+# get game window width
+width = Rasterizer.getWindowWidth()
+\end{verbatim}
+
+
+\subsection{makeScreenshot}
+\begin{verbatim}
+makeScreenshot(filename)
+
+Saves a screenshot to the filename.
+
+filename:
+Type:  string
+Sample Code
+
+# import Rasterizer
+import Rasterizer
+
+# save screenshot
+Rasterizer.makeScreenshot("myScreenshot")
+\end{verbatim}
+
+\subsection{setAmbientColor}
+\begin{verbatim}
+setAmbientColor(rgb)
+
+Sets the ambient color.
+
+rgb:
+Type:  List [ r, g, b]
+
+   r (red channel):
+Type:  float
+Range: 0.0 to 1.0
+
+   g (green channel):
+Type:  float
+Range: 0.0 to 1.0
+
+   b (blue channel):
+Type:  float
+Range: 0.0 to 1.0
+
+
+Note:
+Doesn't work
+Sample Code
+
+# import Rastizer
+import Rasterizer
+
+# set the ambient color
+Rasterizer.setAmbientColor([ 0.8, 0.0, 0.0])
+\end{verbatim}
+
+\subsection{setBackgroundColor}
+\begin{verbatim}
+setBackgroundColor(rgba)
+
+Sets the background color.
+
+rgba:
+Type:  List [ r, g, b, a]
+
+   r (red channel):
+Type:  float
+Range: 0.0 to 1.0
+
+   g (green channel):
+Type:  float
+Range: 0.0 to 1.0
+
+   b (blue channel):
+Type:  float
+Range: 0.0 to 1.0
+
+   a (alpha channel):
+Type:  float
+Range: 0.0 to 1.0
+
+Note:
+Doesn't work
+Sample Code
+
+# import Rastizer
+import Rasterizer
+
+# set the background color to Red
+Rasterizer.setBackgroundColor([1.0, 0.0, 0.0, 1.0])
+\end{verbatim}
+
+\subsection{setFocalLength}
+\begin{verbatim}
+setFocalLength(focalLength)
+
+Sets the optimal focusing distance in stereo mode.  (3D glasses)
+
+focalLength:
+Type:  float number
+
+Note:
+By default stereo mode is turned off.  To turn it on, Buttons Window Menu >> Panels Scene(F10) >> Format Tab >> Game framing settings.  Anaglyph button (red-blue stereo method)
+Sample Code
+# import rasterizer
+import Rasterizer
+
+# set focal length
+Rasterizer.setFocalLength(0.15)
+\end{verbatim}
+
+\subsection{setMaterialMode}
+\begin{verbatim}
+setMateriaMode(mode)
+
+Sets the material mode being used.
+
+mode:
+Type: integer
+
+  0 = KX_TEXFACE_MATERIAL
+  1 = KX_BLENDER_MULTITEX_MATERIAL
+  2 = KX_BLENDER_GLSL_MATERIAL
+
+Note:
+Takes effect when a scene is started/restarted.
+Sample Code
+
+# import rasterizer
+import Rasterizer
+
+# enable GLSL shaders
+Rasterizer.setMaterialMode(2)
+\end{verbatim}
+
+
+\subsection{setMousePosition}
+\subsection{showMouse}
+
+\begin{verbatim}
+showMouse(show)
+
+Shows/hides the mouse cursor.
+
+show:
+Type:  Bool
+   1 = True = Show mouse cursor
+   0 = False = Hide mouse cursor
+Sample Code
+
+# import rasterizer
+import Rasterizer
+
+# show the mouse cursor
+Rasterizer.showMouse(True)
+\end{verbatim}
+\begin{verbatim}setMousePosition
+setMousePosition(x, y)
+
+Sets the position of the mouse cursor in the game window.
+
+x, y:
+Type:  integers
+
+Note:
+(0, 0) is upper left corner of the game window
+Sample Code
+
+# import rasterizer
+import Rasterizer
+
+# set mouse position to upper left corner
+Rasterizer.setMousePosition(0, 0)
+\end{verbatim}
+
+\begin{verbatim}
+setMousePosition(x, y)
+
+Sets the position of the mouse cursor in the game window.
+
+x, y:
+Type:  integers
+
+Note:
+(0, 0) is upper left corner of the game window
+Sample Code
+
+# import rasterizer
+import Rasterizer
+
+# set mouse position to upper left corner
+Rasterizer.setMousePosition(0, 0)
+\end{verbatim}
+
+
+\subsection{showMouse}
+
+
+
+%\section{Class KX_GameActuator}
+
+
+\subsection{fileName}
+\begin{verbatim}
+fileName
+
+gets/sets the name of the blend file to load.
+
+Type:  string
+Sample Code
+
+####################  Get fileName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to the controller named act
+act = controller.actuators["act"]
+
+# get name of blend file from actuator to be loaded
+name = act.fileName
+
+####################  Set fileName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to the controller named act
+act = controller.actuators["act"]
+
+# set name of blend file from actuator to be loaded
+act.fileName = "Level_2.blend"
+\end{verbatim}
+
+\subsection{color}
+\begin{verbatim}
+color / colour
+
+get/set the color of the light
+
+Type:     list [ r, g, b] -- float
+
+r: red channel
+Type: float from 0.0 to 1.0
+
+g: green channel
+Type: float from 0.0 to 1.0
+
+b: blue channel
+Type: float from 0.0 to 1.0
+Sample Code
+
+
+######################## get light color
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# get the color of Lamp
+col = light.color
+
+######################## set light color
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# set the color of Lamp to red
+light.color = [ 1.0, 0.0, 0.0]
+\end{verbatim}
+
+\subsection{distance}
+\begin{verbatim}
+distance
+
+get/set the maximum distance the light illuminates.
+
+Type: float number
+Sample Code
+
+
+######################### get light distance
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# get the distance light reaches
+dist = light.distance
+
+########################### set light distance
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# set max distance
+light.distance = 50.5
+\end{verbatim}
+
+\subsection{energy}
+\begin{verbatim}
+energy
+
+get/set the brightness of the light
+
+Type:  float number
+Sample Code
+
+
+########################## get light energy
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# get the brightness
+bright = light.energy
+
+########################## set light energy
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# set the brightness
+light.energy = 2.5
+\end{verbatim}
+
+\subsection{layer}
+\begin{verbatim}
+layer
+
+get/set the layer mask on which this light will illuminate objects.
+
+Type: interger
+
+1 = layer 1
+2 = layer 2
+3 = layer 2 and 1
+4 = layer 3
+5 = layer 3 and 1
+6 = layer 3 and 2
+7 = layer 3 and 2 and 1
+8 = layer 4
+etc.
+16 = layer 5
+etc.
+32 = layer 6
+etc.
+
+Note:
+A lamp can be on more than one layer.
+
+If the light  is on layer 1,  layer 2 and layer 3 
+layer = light.layer will return 7
+1 (for layer 1) + 2 (for layer 2) + 4 (for layer 3)
+Sample Code
+
+
+########################## get light layer mask
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# get the layer(s) that the light illuminates
+layers = light.layer
+
+########################## set light layer mask
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# set the light to illuminate layers to 1, 2 and 4
+light.layer = 11
+\end{verbatim}
+
+\subsection{spotblend}
+\begin{verbatim}
+spotblend
+
+get/set the softness of the spotlight edge.
+
+Type:  float from 0.0 to 1.0
+Sample Code
+
+
+######################## get softness of spotlight edge
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the spotlight named Spotlight
+light = lightList["OBSpotLight"]
+
+# get softness of spotlight edge
+softness = light.spotblend
+
+###################### set softness of spotlight edge
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the spotlight named Spotlight
+light = lightList["OBSpotLight"]
+
+# set the softness
+light.spotblend = 0.15
+\end{verbatim}
+
+\subsection{spotsize}
+\begin{verbatim}
+spotsize
+
+get/set the cone angle of the spot light.
+
+Type:    float
+Range:  1 to 180 degrees
+Sample Code
+
+
+######################### get cone angle of spotlight
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named SpotLight
+light = lightList["OBSpotLight"]
+
+# get the cone angle of the spotlight
+angle = light.spotsize
+
+######################### set cone angle of spotlight
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named SpotLight
+light = lightList["OBSpotLight"]
+
+# set the cone angle
+light.spotsize = 50.0
+\end{verbatim}
+
+\subsection{type}
+\begin{verbatim}
+type
+
+get/set the type of light
+
+0 = SPOT
+1 = SUN
+2 = NORMAL  (lamp)
+
+Note:
+Only works correctly with SPOT, SUN or NORMAL.
+Both Hemi and Area return 2.  The same as NORMAL
+Sample Code
+
+
+######################## get type of light
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# get the kind of light
+kind = light.type
+
+####################### set type of light
+
+# get the current scene
+scene = GameLogic.getCurrentScene()
+
+# get a list of the lights in the scene
+lightList = scene.lights
+
+# get the light named Lamp
+light = lightList["OBLamp"]
+
+# set to it to SUN
+light.type = 1
+\end{verbatim}
+
+
+\subsection{NORMAL}
+\begin{verbatim}
+NORMAL
+
+light source is a lamp.
+Sample Code
+
+# get a list of the lights in the scene
+lightList = GameLogic.getCurrentScene().lights
+
+# get the light named light1
+light = lightList["OBLight1"]
+
+# make it a lamp
+light.type = light.NORMAL
+
+# check for lamp
+if light.type == light.NORMAL:
+print "Reading by lamp light"
+\end{verbatim}
+
+
+\subsection{SPOT}
+
+%\section{Class BL ActionActuator}
+\begin{verbatim}
+SPOT
+
+Light source is a spotlight.
+Sample Code
+
+# get a list of the lights in the scene
+lightList = GameLogic.getCurrentScene().lights
+
+# get the light named light1
+light = lightList["OBLight1"]
+
+# make it a spotlight
+light.type = light.SPOT
+
+# check for spotlight
+if light.type == light.SPOT:
+print "The spotlight is on me."
+\end{verbatim}
+
+\subsection{action}
+\begin{verbatim}
+action
+
+gets/sets the name of the action.
+
+Type:  string
+Sample Code
+
+################  Get action
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the action actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get the name of the action
+action = act.action
+
+################  Set action
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the action actuator attached to controller named Walk
+act = controller.actuators["Walk"] 
+
+# set action
+act.action = "WalkCycle"
+\end{verbatim}
+\subsection{blendTime}
+\subsection{channelNames}
+\begin{verbatim}
+channelNames
+
+Note:
+An armature is made of bone(s).  By default, the 1st bone is named "Bone", 2nd is named "Bone.001", 3rd is named "Bone.002", etc.  The channel name is the name of the bone.
+
+returns a list of the channels.  
+
+Type:  List [string, string, etc.]
+   example.  ["Bone", "Bone.001", "Bone.002"]
+Sample Code
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get a list of the armature channels
+channelList = act.channelNames
+\end{verbatim}
+
+
+\subsection{frame}
+\begin{verbatim}
+frame
+
+gets the current frame number of the action.
+
+Type: float 
+Sample Code
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get number of the current frame
+frame = act.frame
+\end{verbatim}
+
+
+\subsection{frameEnd}
+\begin{verbatim}
+frameEnd
+
+gets/sets the number of the last frame of the action.
+
+Type:  float 
+Sample Code
+
+################  Get frameEnd
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get number of the last frame
+endFrame = act.frameEnd
+
+################  Set frameEnd
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set the end
+act.frameEnd = 15.0
+\end{verbatim}
+
+
+\subsection{framePropName}
+\begin{verbatim}
+framePropName
+
+Note:
+To create a Frame Property, use Add Property to add a property (type float or integer) to the game object.  
+
+gets/sets the name of the Frame Property.
+
+Return type:  string
+Sample Code
+
+
+################  Get framePropName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get object controller attached to
+obj = controller.owner
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get the name the frame property name
+frameName = act.framePropName
+
+# get current frame
+currentFrame = obj["frameName"] 
+
+################  Set framePropName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set the name of the frame property name
+act.framePropName = "currentFrame"
+\end{verbatim}
+
+\subsection{frameStart}
+\begin{verbatim}
+frameStart
+
+sets/gets the starting frame of the action.
+
+Type:  float
+Sample Code
+
+
+################  Get frameStart
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get number of starting frame
+startFrame = act.frameStart
+
+################  Set frameStart
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set starting frame
+act.frameStart = 10.0
+\end{verbatim}
+
+
+\subsection{mode}
+\begin{verbatim}
+mode
+
+gets/sets the action playback mode
+
+Type:  integer
+  0 = KX_ACTIONACT_PLAY
+  1 =
+  2 = KX_ACTIONACT_FLIPPER
+  3 = KX_ACTIONACT_LOOPSTOP
+  4 = KX_ACTIONACT_LOOPEND
+  5 =
+  6 = KX_ACTIONACT_PROPERTY
+Sample Code
+
+
+################  Get mode
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get playback mode
+actionType = act.mode
+
+################  Set mode
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set playback mode
+act.mode = 0
+\end{verbatim}
+
+
+\subsection{priority}
+\begin{verbatim}
+priority
+
+Note:
+0 (zero) is the highest priority.  1 is the next highest priority.  etc.
+Actuators with a high priority will override actuators with a lower priority.
+
+gets/sets the priority for this action
+
+Type:  integer
+Sample Code
+
+
+################  Get priority
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get the priority
+priority = act.priority
+
+################  Set priority
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set priority
+act.priority = 1
+\end{verbatim}
+
+
+\subsection{propName}
+\begin{verbatim}
+propName
+
+Note:
+Only used with Action Playback Type: Property
+
+gets/sets the name of the property.  
+
+Type:  string
+Sample Code
+
+
+################  Get propName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# get name of the property
+name = act.propName
+
+################  set propName
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# set name of the property
+act.propName = "prop"
+\end{verbatim}
+
+
+\subsection{useContinue}
+\begin{verbatim}
+useContinue
+
+gets/sets the status of the Action Actuator Continue button.
+
+Type:   Bool
+   1 = True:
+Continue playing the the Action from the frame it was playing when the actuator was turned off (State System). 
+   0 = False:
+Restart the Action.  Play it from the beginning.
+Sample Code
+
+################  Get continue
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# Continue from last frame played or restart?
+continue_action = act.useContinue
+
+################  Set continue
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to controller named Walk
+act = controller.actuators["Walk"]
+
+# Set it to Continue from last frame played
+act.useContinue = True
+\end{verbatim}
+
+\subsection{name}
+\begin{verbatim}
+name
+
+Returns the name of the logic brick.
+
+Type:  string
+Sample Code
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to the controller named act
+act = controller.actuators["act"]
+
+# get name
+brickName = act.name
+\end{verbatim}
+
+\subsection{owner}
+\begin{verbatim}
+owner
+
+Gets the game object that owns the logic brick.
+
+Type:  KX_GameObject
+Sample Code
+
+# get the controller
+controller = GameLogic.getCurrentController()
+
+# get the actuator attached to the controller named act
+act = controller.actuators["act"]
+
+# get brick owner
+obj = act.owner
+\end{verbatim}
+
+\subsection{SUN}
+\begin{verbatim}
+SUN
+
+Light source is a sun.
+Sample Code
+
+# get a list of the lights in the scene
+lightList = GameLogic.getCurrentScene().lights
+
+# get the light named light1
+light = lightList["OBLight1"]
+
+# make it a sun
+light.type = light.SUN
+
+# check for Sun
+if light.type == light.SUN:
+print "Sunny days are here"
+\end{verbatim}

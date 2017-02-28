@@ -1,0 +1,94 @@
+%!TEX program = xelatex  
+%% LyX 2.2.0rc1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,justified]{tufte-book}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose}
+\setcounter{secnumdepth}{1}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  including the \maketitle %%%%%%%%%%%%%%%%%%
+\usepackage{ifxetex}
+\ifxetex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+  \usepackage{fontspec}
+\fi
+
+%%%%%%%%%%%%%%%% uncomment this line if you prefer colored hyperlinks 
+%%%%%%%%%%%%%%%% (e.g., for onscreen viewing)
+\usepackage{hyperref}
+\hypersetup{colorlinks}
+
+%%%%%%%%%%%%%%%%%%%% For graphics / images
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% chinese words package
+%\usepackage{fontspec, xunicode, xltxtra}  
+%\setmainfont{Hiragino Sans GB} 
+
+\usepackage{xeCJK}
+\setCJKmainfont{STSong}     
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
+%%%%%%%%%%%%%%%  title information
+\title{Note Book}
+\author[]{Fu Li}
+\publisher{Publisher of This Book}
+
+\usepackage{shorttoc}
+
+\renewcommand*\contentsname{Contents (detailed)}
+
+
+\begin{document}
+\maketitle
+
+%% short contents
+\pdfbookmark[1]{Contents}{toc}
+\shorttoc{Contents}{0}
+\cleardoublepage
+
+%% detailed contents with depth of 2
+\pdfbookmark[1]{Contents (detailed)}{toc (detailed)}
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+\input{chapter/co2.tex}
+\input{chapter/CL.tex}
+\input{chapter/西方哲学.tex}
+\input{chapter/owncloud.tex}
+\input{chapter/blender.tex}
+%\input{chapter/blender_python.tex}
+
+
+
+\listoffigures
+
+\listoftables
+
+
+
+\end{document}

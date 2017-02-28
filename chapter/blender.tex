@@ -1,0 +1,158 @@
+\chapter{Blender}
+
+blender could convert the movie, such as format like '.mp4', to pictures squence, like '.png'.
+
+\begin{itemize}
+\item Blender does not support the gif format.
+\item For a list of supported formats see \url{https://www.blender.org/manual/data_system/files/media/image_formats.html#image-formats}
+\end{itemize}
+
+
+Two way to choose the object
+
+\begin{itemize}
+\item  bpy.data.objects["Cube"]
+\item bpy.context.object \footnote{While it’s useful to be able to access data directly by name or as a list, it’s more common to op‐ erate on the user’s selection. The context is always available from bpy.context and can be used to get the active object, scene, tool settings along with many other attributes.
+
+Note that the context is read-only. These values cannot be modified directly, though they may be changed by running API functions or by using the data API.
+So bpy.context.object = obj will raise an error.
+But bpy.context.scene.objects.active = obj will work as expected.
+}
+\end{itemize}
+
+Animation
+
+There are 2 ways to add keyframes through Python.
+The first is through key properties directly, which is similar to inserting a keyframe from the but‐ ton as a user. You can also manually create the curves and keyframe data, then set the path to the property. Here are examples of both methods.
+Both examples insert a keyframe on the active object’s Z axis.
+
+
+Simple example:
+
+\begin{verbatim}
+Using Low-Level Functions:
+obj = bpy.context.object
+obj.location[2] = 0.0
+obj.keyframe_insert(data_path="location", frame=10.0, index=2)
+obj.location[2] = 1.0
+obj.keyframe_insert(data_path="location", frame=20.0, index=2)
+\end{verbatim}
+
+
+
+Using Low-Level Functions:
+
+\begin{verbatim}
+obj = bpy.context.object
+obj.animation_data_create()
+obj.animation_data.action = bpy.data.actions.new(name="MyAction")
+fcu_z = obj.animation_data.action.fcurves.new(data_path="location", index=2)
+fcu_z.keyframe_points.add(2)
+fcu_z.keyframe_points[0].co = 10.0, 0.0
+fcu_z.keyframe_points[1].co = 20.0, 1.0
+\end{verbatim}
+
+
+\section{The python file for moving object}
+\begin{verbatim}
+import bpy  
+from math import sin
+from mathutils import Vector
+
+# useful shortcut
+scene = bpy.context.scene
+
+# this shows you all objects in scene
+scene.objects.keys()
+
+# when you start default Blender project, first object in scene is a Cube
+kostka = scene.objects[0]
+
+# you can change location of object simply by setting the values
+kostka.location = (1,2,0)
+
+# same with rotation
+kostka.rotation_euler = (45,0,0)
+
+# this will make object cease from current scene
+scene.objects.unlink(kostka)
+
+# clear everything for now
+scene.camera = None  
+for obj in scene.objects:  
+    scene.objects.unlink(obj)
+
+# create sphere and make it smooth
+bpy.ops.mesh.primitive_uv_sphere_add(location = (2,1,2), size=0.5)  
+bpy.ops.object.shade_smooth()  
+kule = bpy.context.object
+
+# create new cube
+bpy.ops.mesh.primitive_cube_add(location = (-2,1,2))  
+kostka = bpy.context.object
+
+# create plane 
+bpy.ops.mesh.primitive_plane_add(location=(0,0,0))  
+plane = bpy.context.object  
+plane.dimensions = (20,20,0)
+
+# for every object add material - here represented just as color
+for col, ob in zip([(1, 0, 0), (0,1,0), (0,0,1)], [kule, kostka, plane]):  
+    mat = bpy.data.materials.new("mat_" + str(ob.name))
+    mat.diffuse_color = col
+    ob.data.materials.append(mat)
+
+# now add some light
+lamp_data = bpy.data.lamps.new(name="lampa", type='POINT')  
+lamp_object = bpy.data.objects.new(name="Lampicka", object_data=lamp_data)  
+scene.objects.link(lamp_object)  
+lamp_object.location = (0, 0, 12)
+
+# and now set the camera
+cam_data = bpy.data.cameras.new(name="cam")  
+cam_ob = bpy.data.objects.new(name="Kamerka", object_data=cam_data)  
+scene.objects.link(cam_ob)  
+cam_ob.location = (-1, -1, 5)  
+cam_ob.rotation_euler = (3.14/6,0,-0.3)  
+cam = bpy.data.cameras[cam_data.name]  
+cam.lens = 10
+
+
+### animation
+# positions = ((0,0,2),(0,1,2),(3,2,1),(3,4,1),(1,2,1))
+
+positions = []
+angles = []
+
+end = 500
+
+for i in range(0,end):
+    positions.append((i/50., 3*sin(i/5.), 1)) 
+    #positions.append((0,0,i))
+
+
+# start with frame 0
+number_of_frame = 0  
+bpy.context.scene.frame_end = end
+
+for pozice in positions:
+
+    # now we will describe frame with number $cislo_snimku
+    scene.frame_set(number_of_frame)
+
+    # set new location for sphere $kule and new rotation for cube $kostka
+    kule.location = pozice
+    kule.keyframe_insert(data_path="location", index=-1)
+
+
+    #kostka.location = pozice
+    #kostka.keyframe_insert(data_path="location", index=-1)
+
+    kostka.rotation_euler = pozice
+    kostka.keyframe_insert(data_path="rotation_euler", index=-1)
+
+    # move next 10 frames forward - Blender will figure out what to do between this time
+    number_of_frame += 1
+\end{verbatim}
+ 
+

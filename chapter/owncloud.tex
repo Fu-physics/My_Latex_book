@@ -1,0 +1,88 @@
+\chapter{install owncloud on ubuntu}
+This note is based on the web\footnote{\url{https://ittutorials.net/linux/owncloud/installing-owncloud-in-ubuntu/}}, which shown the almost all steps, but with diffrent version of owncloud and ubuntu, so we need to make some modulation. 
+
+The latest release of ownCloud at the time of this writing is 9.1.0 and the latest Ubuntu LTS release is Ubuntu 16.04 desktop so this tutorial will be based in these two.
+
+\subsection{Update server and set it with a static IP address}
+
+Make sure the server is fully patched. Type \textcolor{red}{sudo apt-get update upgrade} on terminal, then type \textcolor{red}{sudo apt-get dist-upgrade}  reboot the server after all patches have been installed. After the server comes back from the reboot, make sure its set with a static IP.  To see the the server current IP configuration type this on terminal: \textcolor{red}{sudo nano /etc/network/interfaces} and you should get this:
+
+\begin{verbatim}
+
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+
+# The primary network interface
+
+auto wlp2s0
+iface wlp2s0 inet static
+
+address 192.168.1.10
+netmask 255.255.255.0
+gateway 192.168.1.1
+dns-nameservers 8.8.8.8 8.8.4.4
+\end{verbatim}
+\footnote{1:address 192.168.1.10 is the IP you use to lauch the owncloud// 2:gateway 192.168.1.1 is the fix, which you shoud set the same with your Ruter}
+
+Save the file by pressing the Ctrl + X keys on your keyboard, and then restart the network service by typing this on terminal: \textcolor{red}{sudo /etc/init.d/networking restart}
+
+\subsection{Installing Apache,PHP and MySQL}
+
+The easiest way to install the LAMP stack at once in Ubuntu is using the Tasksel script. On your terminal type : \textcolor{red}{sudo apt-get install tasksel} and then type \textcolor{red}{sudo tasksel install lamp-server} this will install the basic LAMP stack server for you. Enter a MySQL server password when prompted. After the installation is complete, type the IP address of your server in a browser and you should see the page which title is Apache2 Ubuntu Default Page.
+
+You should probably start with sudo -i so you don’t have to put “sudo” in front of all the following commands or keep re-typing your password. This is a long post but you can easily have everything set up in under 30 minutes. Let’s get everything installed:\footnote{this part is important, please see the detail in web\url{https://www.tombrossman.com/blog/2016/install-owncloud-9-on-ubuntu-16.04/}}
+
+\textcolor{red}{sudo -i apt install apache2 mariadb-server php7.0 php7.0-common libapache2-mod-php7.0 php7.0-gd php-xml-parser php7.0-json php7.0-curl php7.0-bz2 php7.0-zip php7.0-mcrypt php7.0-mysql memcached php-memcached php-redis redis-server}
+
+
+
+\subsection{Change PHP max upload limit}
+
+PHP only allows 2MB files upload by default. I assume you will be uploading bigger files to your ownCloud server, so we need to increase the upload size in the php.ini file. To do that, type \textcolor{red}{sudo nano /etc/php5/apache2/php.ini} and search for \textcolor{blue}{upload\_max\_filesize} and for \textcolor{blue}{post\_max\_size} on the file and change both numbers to whatever you need.
+
+Reload apache. \textcolor{red}{Sudo service apache2 reload} 
+
+
+\subsection{Create the Database}
+This part I cannot following the original web page, so I find another way, see web \url{https://www.howtoforge.com/how-to-install-owncloud-7-on-ubuntu-14.04}
+
+login to MySQL and create the database. type \textcolor{red}{mysql –u root –p}
+
+\begin{verbatim}
+CREATE DATABASE owncloud;
+
+GRANT ALL ON owncloud.* to 'owncloud'@'localhost' IDENTIFIED BY 'database\_password';
+
+exit;
+\end{verbatim}
+
+\subsection{Install ownCloud}
+
+Grab the latest release from the ownCloud website. At the time of this writing, version 9.1 is the latest release. To download it directly from the server, switch to the \textcolor{red}{cd /opt/} directory, and type this command in terminal: \textcolor{red}{sudo wget https://download.owncloud.org/community/owncloud-9.1.0.zip}
+
+\begin{itemize}
+        \item Unzip the archive with this command: sudo unzip owncloud-9.0.0.zip
+        \item Move the ownCloud files to the the WWW web directory: sudo mv /opt/owncloud /var/www/
+        \item Make apache the owner of this directory : sudo chown –R www-data:www-data /var/www/owncloud/
+        \item Change your apache virtual host to point to this ownCloud directory:  sudo nano /etc/apache2/sites-available/000-default.conf change the DocumentRoot to /var/www/owncloud/
+\end{itemize}
+
+
+Type in the IP address\footnote{192.168.1.10 in my case} of your server in your preferred browser and you should get a webpage which shows a general web of owncloud but needs more modules. In my case, I need install php7.0-md and multi.
+
+
+
+ Install them by typing this on terminal \textcolor{red}{sudo apt-get install php5-md} and \textcolor{red}{sudo apt-get install multi} reload apache again:  \textcolor{red}{sudo service apache2 reload} and the ownCloud wizard shouldn’t complain now.
+
+
+\textcolor{blue}{Username Password} is the username and password you use to landing the owncloud. 
+
+In the lower tab below the MySQL/MariaDB give the entry of the \textcolor{blue}{username=owncloud password=database\_password databasename=owncloud}
+
+Then press \textcolor{blue}{Finish} setup.
+
+
