@@ -981,8 +981,10 @@ source /opt/intel/<address>/mklvars.sh intel64 mod ilp64
 
 After that we have 
 \begin{verbatim}
-declare -x CPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include:/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include/intel64_mac/ilp64"
-declare -x DYLD_LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/compiler/lib:/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib"
+declare -x CPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include:
+/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include/intel64_mac/ilp64"
+declare -x DYLD_LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/compiler/lib:
+/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib"
 d
 declare -x MKLROOT="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl"
 declare -x NLSPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib/locale/%l_%t/%N"
@@ -998,5 +1000,46 @@ I cannot find the "CPATH=..", "MKLROOT=..." and so on, so I need to re-run the f
 source /opt/intel/<address>/mklvars.sh  intel64 mod ilp64
 \end{verbatim}
 Or I cannot use "MKL" package!
+
+\section{Set the permanently environment variables}
+
+\begin{verbatim}
+Firstly open the ".bash_profile" located at the home dir. 
+
+$cd ~
+$open .bash_profile
+\end{verbatim}
+
+Then set the MKL enviroment variables permanantly
+
+\begin{verbatim}
+# added MKL package PATH
+
+export DYLD_LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/compiler/lib:
+/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib"
+
+export LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/compiler/lib:
+/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib"
+
+export CPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include:
+/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include/intel64_mac/ilp64"
+
+export MKLROOT="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl"
+
+export NLSPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib/locale/%l_%t/%N"
+
+\end{verbatim}
+
+At last, we need to run this file, as  following 
+
+\begin{verbatim}
+$. .bash_profile
+or using
+$source .bash_profile
+\end{verbatim}
+
+Here the first "." in the first line is same with soucre when you are in home dir.  Nomarlly, we use "source" to run a shell file ("*.sh") on bash.
+
+
 
 
