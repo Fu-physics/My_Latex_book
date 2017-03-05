@@ -1,4 +1,5 @@
 \chapter{Computer Languge}
+
 \label{ch:Computer Languge}
 
 \section{blender}
@@ -1040,6 +1041,22 @@ $source .bash_profile
 
 Here the first "." in the first line is same with soucre when you are in home dir.  Nomarlly, we use "source" to run a shell file ("*.sh") on bash.
 
+You also could find massage abou the MKL at \url{https://software.intel.com/en-us/articles/intel-math-kernel-library-intel-mkl-2017-getting-started}.
 
+\section{Using MKL}
 
+I have tested the MKL for lapack and fftw3. The result shows that MKL work good for lapack, but not fftw3. Maybe that fftw3 "call" methods are different between "-lfftw3" and "-mkl".
 
+The complie of 
+\begin{verbatim}
+ifort -mkl test_lapack.f90 
+\end{verbatim}
+give the right result.
+
+However, if we use "-llapck" or "-lfftw3", ifort works very well. 
+
+\underline{\textbf{But note that ifort  just suppports "*.f", "*.f90", does not support *.f95" and more high fortran version.}}
+
+Based on those information, we better use ifort with manual installed packages, like "-llapack" and "-lfftw3", if we do not very good at "-mkl". This also means that we could not using coarray, forall, where...., because that whose was added in advanced verision that fortran 90.
+ 
+ 
