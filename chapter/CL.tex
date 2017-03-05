@@ -198,6 +198,208 @@ Another way to stop program execution is to execute a \textbf{stop} statement. T
    stop 12345
 \end{verbatim}
 
+\subsection{Other books}
+The import Statement
+
+The import statement is used to gain access to an entity that is not in the current scope. This is frequently used inside an interface block  since an interface block has its own scope. For example, supposed a kind number is declared in a module and is need-ed to declare a dummy argument in an interface block. The import statement in the fol-lowing code makes it accessible inside the interface block. A use statement inside the interface block also could be used to achieve the same purpose.
+
+\begin{verbatim}
+
+module param_mod
+        implicit none
+        integer, parameter :: kk = kind(0.0)
+     end module param_mod
+     program import_prog
+        use param_mod
+        implicit none
+       interface
+           subroutine s(x)
+           import :: kk
+           real(kind=kk), intent(in) :: x
+           end subroutine
+        end interface
+...
+end program import_prog
+\end{verbatim}
+
+Pure Procedures and Side Effects:
+
+When a procedure is executed, a side effect is a change in the status of the program that is something other than just computing a value to return to the calling procedure. Examples are changing a variable declared in a program or module above the con- tains statement or reading data from a file.
+
+
+
+
+\subsection{subroutine}
+
+Sequential search:
+
+\begin{verbatim}
+subroutine search_1(lost_card, card_number, found)
+integer, dimension(:), intent(in) :: lost_card !no need to clear the demension of the array.
+integer, intent(in) :: card_number
+logical, intent(out) :: found
+integer :: i
+found = .false.
+do i = 1, size(lost_card)
+if (card_number == lost_card(i)) then
+found = .true.
+exit
+end if 
+end do
+end subroutine search_1
+
+\end{verbatim}
+
+
+\subsection{Derived Types}
+
+
+\begin{verbatim}
+module m
+        implicit none
+        private
+        type, public :: t
+           real:: x=3.3
+        contains
+           procedure, nopass :: open_files
+end type
+     contains
+        subroutine open_files()
+           print *, "Opening file ..."
+           ! open ( . . .
+        end subroutine open_files
+end module
+program p
+        use m
+        implicit none
+        type(t) :: tt
+        call tt%open_files()
+end program p
+\end{verbatim}
+
+All type definitions should be put above the contains statement in a module. In other words, a type definition should not appear in a main pro- gram or a procedure. Each should be given the public or private attribute.
+
+\begin{verbatim}
+program exception
+        use, intrinsic :: ieee_exceptions, only: &
+              ieee_overflow, ieee_get_flag, ieee_set_halting_mode
+        implicit none
+        real :: x, y, z
+        logical :: overflow_flag = .false.
+        print *, "Enter values for x and y to be multiplied:"
+        read *, x, y
+        ! Set the halting mode to continue even if there is overflow.
+        call ieee_set_halting_mode(ieee_overflow, .false.)
+! Do the multiplication z=x*y
+        ! Check if overflow occurred
+        call ieee_get_flag(ieee_overflow, overflow_flag)
+        if (overflow_flag) then
+           print *, "An overflow occurred in the product x*y"
+        else
+           print *, "No overflow occurred in the product x*y"
+        end if
+        print *, "   where x = ", x, " and y = ", y
+        print *, "The product was computed as ", z
+     end program exception
+\end{verbatim}
+
+
+After the type declarations, there are statements to print a prompt and read in val- ues for the variables x and y. Before the two values are multiplied, the procedure ieee$\_$set$\_$halting$\_$mode is called so that exception will be signaled if there is an over- flow in a computation that follows. The value .false. indicates that the program is not to halt if there is an overflow.
+After the multiplication is performed the module subroutine ieee$\_$get$\_$flag is called to determine if overflow occurred. The result is stored in the logical variable overflow$\_$flag. Then the flag is tested and an appropriate message is printed. In the context of a larger program, action other than printing a message might be taken.
+In a production program, more should be done. First, a check should be made that IEEE arithmetic is supported by the compiler. Then we should check that overflow checking is supported. We assume that both of these is true, but they can be checked using other features of the IEEE modules.
+There are many other features of the IEEE modules, which can be discovered in a reference manual or book.
+
+\subsection{Generic Procedures}
+
+Many intrinsic procedures are generic in that they allow arguments of different types. For example, the intrinsic function abs will take an integer, real, or complex argument. The programmer also can write generic procedures.
+
+\begin{verbatim}
+
+     module swap_module
+        implicit none
+        public :: swap
+        private :: swap_reals, swap_integers
+        interface swap
+           procedure swap_reals, swap_integers
+        end interface
+     contains
+     subroutine swap_reals(a, b)
+        real, intent(in out) :: a, b
+        real :: temp
+        temp = a a=b
+        b = temp
+     end subroutine swap_reals
+     
+     subroutine swap_integers(a, b)
+        integer, intent(in out) :: a, b
+        integer :: temp
+        temp = a
+       a=b
+        b = temp
+     end subroutine swap_integers
+     end module swap_module
+     
+     program test_swap
+        use swap_module
+        implicit none
+        real :: x, y
+        integer :: i, j
+        x = 1.1
+        y = 2.2
+        i=1 
+        j=2
+        call swap(x, y)
+        print *, x, y
+        call swap(i, j)
+        print *, i, j
+     end program test_swap
+     
+Running this program produces
+2.2000000 1.1000000 
+2 1
+\end{verbatim}
+
+\section{Elemental Procedures}
+An elemental procedure is one written with scalar (nonarray) dummy arguments, but which can be called with array actual arguments. When this is done, the computa- tion in the procedure is performed element-by-element on each element of the array (or arrays) as if the invocation of the procedure were in a loop, executed once for each element of an array.
+
+\begin{verbatim}
+module swap_module
+        implicit none
+        public :: swap
+        private :: swap_reals, swap_integers
+        interface swap
+           procedure swap_reals, swap_integers
+        end interface
+     contains
+     elemental subroutine swap_reals(a, b)   ! "elemental" is must be here
+        real, intent(in out) :: a, b
+        real :: temp
+        temp = a
+        a=b
+        b = temp
+     end subroutine swap_reals
+     elemental subroutine swap_integers(a, b)   ! "elemental" is must be here
+        integer, intent(in out) :: a, b
+        integer :: temp
+     temp = a 
+     a=b
+     b = temp
+    end subroutine swap_integers
+    end module swap_module
+    program test_swap_arrays
+       use swap_module
+       implicit none
+       integer, dimension(3) :: i = [1, 2, 3], &
+j = [7, 8, 9]
+       call swap(i, j)
+       print *, i
+       print *, j
+    end program test_swap_arrays
+
+
+\end{verbatim}
+
+        
 \section{linux}
 
 pwd, print working directory, which outputs (displays) the current directory.\\
@@ -588,6 +790,213 @@ $ git push origin master
 
 
 
+\section{Terminal}
 
+To clear the terminal manually:
+
+
+"Command+K"  for newer keyboards
+
+
+The "open" command opens a file (or a directory or URL), just as if you had double-clicked the file's icon. If no application name is specified, the default application as determined via LaunchServices is used to open the specified files. Such as
+
+open my.pdf
+
+\begin{verbatim}
+
+Shows the hierarchical arrangement contents of a directory : $ tree [dir_name]
+
+To make a new directory:  $ mkdir [directory name]
+
+To change to another directory:   $ cd [directory name]
+
+To remove an empty directory:  $ rmdir [directory name]
+
+Dump the contents of a file to the screen: $ cat [file name]
+
+Display a text file one page at a time: $ more [file name]
+
+Display a text file one page at a time: $ less [file name]
+
+$ chmod [options] [permission mode] [target_file]
+
+
+\end{verbatim}
+
+\begin{verbatim}
+$ ls [options] [directory or file name]
+
+Commonly used options
+	-l	display contents in “long” format
+	-a	show all file ( including hidden files - those beginning with . )
+	-t	sort listing by modification time
+	-r	reverse sort order
+	-F	append type indicators with each entry ( * / = @ | )
+	-h	print sizes in user-friendly format (e.g. 1K, 234M, 2G)
+
+\end{verbatim}
+
+\begin{verbatim}
+Copying Files:  $ cp [options] [source] [target]
+
+	If source is a file, and…
+target is a new name: copy source and call it target
+target is a directory: copy source and place it in directory
+
+	If source is a directory, the -r option is used, and…
+target is a new name: copy source and contents into directory with new name
+target is a directory: copy source and place it in directory
+\end{verbatim}
+
+
+\begin{verbatim}
+Moving/Renaming Files: $ mv [source] [target]
+
+	If source is a directory, and…
+target is an existing dir: source directory is moved inside target directory
+target is a new name: source directory is renamed to new name
+
+	If source is file, and…
+target is an existing dir: source file is moved inside target directory
+target is a new name: source file is renamed to new name
+\end{verbatim}
+
+
+\begin{verbatim}
+Deleting Files:  $ rm [options] [file name]
+
+Commonly used options
+	-i    prompt user before any deletion
+	-r    remove the contents of directories recursively
+	-f    ignore nonexistent files, never prompt
+\end{verbatim}
+
+\begin{Verbatim}
+The scp command allows transfers to remote locations without using a GUI. 
+
+$ scp [[user@]host1:]filename1 [[user@]host2:]filena2
+
+$ scp myfile1 user@ada.tamu.edu
+$ scp myfile1 user@ada.tamu.edu:/scratch/user/[NetID]
+$ scp user@ada.tamu.edu:myfile2 ~/Desktop/newFileName
+$ scp -r user@ada.tamu.edu:dir3 local_dir/  (recursive) 
+\end{Verbatim}
+
+\begin{verbatim}
+The ps command shows currently running processes: $ ps [options]
+
+The top command displays real-time system resources usage:  $ top [options]
+\end{verbatim}
+
+
+\begin{verbatim}
+The kill command can generate a signal to the process specified by a PID.
+
+$ kill [signal name] pid
+
+\end{verbatim}
+
+The shell is command language interpreter that executes commands. Commands can be read from stdin (keyboard) or from a file (script). There are several variants of shell.  Our clusters use Bash.Bash has a number of start-up files that are used to initialize the shell.
+
+Initialization differs depending on whether the shell is a login shell, an interactive shell, or a non-interactive shell.
+
+Shell variables are name-value pairs created and maintained by the shell.
+
+The source command is a built-in bash command and the ‘.’ is simply another name for it.
+
+Both commands take a script name as an argument.  The script will be executed in the context of the current shell.  All variables, functions, aliases set in the script will become a part of the current shell’s environment.
+\begin{verbatim}
+$ source .bash_profile
+$ . .bash_profile
+\end{verbatim}
+
+
+\begin{Verbatim}
+$ find [target dir] [expression]
+
+$ find . -name "*.txt" -print
+ 
+$ find . -newer results4.dat -name "*.dat" -print
+ 
+$ find /scratch/user_NetID -mtime +2  -print
+ 
+$ find /scratch/user_NetID -mtime -7  -print
+ 
+$ find /tmp -user user_NetID -print
+\end{Verbatim}
+
+\begin{verbatim}
+$ diff [options] FILES
+ 
+# basic example
+ 
+  $ diff file1 file2
+ 
+# side by side comparison (long line truncated):
+ 
+  $ diff -y file1 file2
+ 
+# side by side comparison with screen width of 180 characters
+ 
+  $ diff -y -W 180 file1 file2
+
+\end{verbatim}
+
+
+Double quotes allow variable and command substitution, and protect any other metacharacters from interpretation by the shell.
+
+\begin{verbatim}
+$ name=user_NetID
+$ echo “Hi $name, I’m glad to meet you!”
+Hi user_NetID, I’m glad to meet you!
+$ echo “Hey $name, the time is $(date)”
+Hey user_NetID, the time is Mon Sep 13 12:15:34 CDT 2004
+
+\end{verbatim}
+
+
+When you launch a terminal it will always run some program inside it. That program will generally by default be your shell. On OS X, the default shell is Bash. In combination that means that when you launch Terminal you get a terminal emulator window with bash running inside it (by default)\url{http://unix.stackexchange.com/questions/180943/terminal-vs-bash} and \url{http://stackoverflow.com/questions/733824/how-to-run-a-shell-script-on-a-unix-console-or-mac-terminal}.
+
+You can change the default shell to something else if you like, although OS X only ships with bash and tcsh. You can choose to launch a custom command in a new terminal with the open command:
+open -b com.apple.terminal somecommand
+In that case, your shell isn't running in it, and when your custom command terminates that's the end of things.
+
+If you run bash inside your terminal that is already running bash, you get exactly that: one shell running another. You can exit the inner shell with Ctrl-D or exit and you'll drop back to the shell you started in. That can sometimes be useful if you want to test out configuration changes or customise your environment temporarily — when you exit the inner shell, the changes you made go away with it. You can nest them arbitrarily deeply. If you're not doing that, there's no real point in launching another one, but a command like bash some-script.sh will run just that script and then exit, which is often useful.
+
+\section{Shell}
+
+\begin{verbatim}
+$a="the title"
+$echo $a
+\end{verbatim}
+Very import note: there is no blank between "a" and "=".
+
+
+\chapter{MKL}
+
+Sets the environment for Intel MKL to use the Intel 64 architecture, ILP64 programming interface, and Fortran modules.
+\begin{verbatim}
+source /opt/intel/<address>/mklvars.sh intel64 mod ilp64
+\end{verbatim}
+
+After that we have 
+\begin{verbatim}
+declare -x CPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include:/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include/intel64_mac/ilp64"
+declare -x DYLD_LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/compiler/lib:/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib"
+d
+declare -x MKLROOT="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl"
+declare -x NLSPATH="/opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/lib/locale/%l_%t/%N"
+....
+\end{verbatim}
+
+Every time I restart the terminal,  and run 
+\begin{verbatim}
+export
+\end{verbatim}
+I cannot find the "CPATH=..", "MKLROOT=..." and so on, so I need to re-run the following again at base(terminal)
+\begin{verbatim}
+source /opt/intel/<address>/mklvars.sh  intel64 mod ilp64
+\end{verbatim}
+Or I cannot use "MKL" package!
 
 
