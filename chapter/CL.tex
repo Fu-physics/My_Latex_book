@@ -787,6 +787,73 @@ $ git push origin master
 
 \end{verbatim}
 
+\subsection{git and visual studio code}
+
+\paragraph*{Initializing}
+
+As you probably know, Git is a version control system, which allows you to save snapshots of your projects into repositories. Before you can start taking snapshots though, you have to establish a repository by either creating one from scratch or by copying an already established repository.
+
+\begin{verbatim}
+$git init 
+\end{verbatim}
+
+initializes a new empty repository on your local machine:
+
+\paragraph*{Staging}
+
+The goal of really any version control system is to save periodic snapshots of your projects. Once you have a snapshot saved, you can feel safe working on your project as you can always revert back to an earlier snapshot if you make a huge error.
+
+If saving the snapshot is the goal, then staging is the actual act of taking the snapshot before you add it to the photo album (repository) for safe keeping.
+
+\begin{verbatim}
+$git add <filename> 
+\end{verbatim}
+adds a new file to staging. This file is now ready to be committed. Remember, you have taken the snapshot but not saved it yet. It’s in the queue waiting to be added (or committed) to your local repository.
+\begin{verbatim}
+$git add readme.md
+$git add . 
+\end{verbatim}
+
+adds all files in the current directory and all sub directories to your local working directory.
+git status lists all files ready to be committed, which have been added to staging, and files not currently being tracked by Git. Use this command to view the state of your working directory and staging area.
+
+\begin{verbatim}
+$git add README.md
+\end{verbatim}
+git add <filename> adds a new file to staging. This file is now ready to be committed. 
+Remember, you have taken the snapshot but not saved it yet. It’s in the queue waiting
+to be added (or committed) to your local repository.
+
+\paragraph*{Committing}
+
+After taking a snapshot, you want to move the snapshot from staging to your actual repository. Committing achieves this. From there you have the option of continuing to work locally or sharing those commits to a remote repository, perhaps on your web hosting platform or on Github.
+
+\begin{verbatim}
+git commit -am ‘<add note>’ 
+\end{verbatim}
+
+commits new and updated files - moving them from the staging queue to your local repository. Make sure the note you add is relevant - that is, it summarizes the changes or updates you’ve made.
+
+\paragraph*{Push to remote}
+
+\begin{verbatim}
+$git push origin master 
+\end{verbatim}
+
+gathers all the committed files from your local repository and uploads them to a remote repository. Keep in mind that not all files are included in the upload; only new files and files that contain changes. Put another way, this command syncs your local repository and external repository so they are exactly the same.
+
+Before you can push, you must add a remote repository to share your local repository with, which you’ll see in the example.
+
+\begin{verbatim}
+$ git remote add origin git@github.com:mjhea0/git-commands.git
+$ git push origin master
+\end{verbatim}
+
+
+
+
+
+
 
 
 

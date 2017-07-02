@@ -1,0 +1,52 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}The Usage of This Note}{7}{chapter.1}
+\contentsline {chapter}{\numberline {2}CO2}{9}{chapter.2}
+\contentsline {subsection}{For $CO_{2}$}{10}{subsection*.3}
+\contentsline {subsection}{WAVENUMBER/WAVELENGTH CONVERTER}{10}{subsection*.4}
+\contentsline {chapter}{\numberline {3}Computer Languge}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}blender}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}OSX}{11}{section.3.2}
+\contentsline {subsection}{burn orignal.iso into usb}{11}{subsection*.5}
+\contentsline {section}{\numberline {3.3}python}{11}{section.3.3}
+\contentsline {section}{\numberline {3.4}Fortran}{12}{section.3.4}
+\contentsline {subsection}{Package }{12}{subsection*.6}
+\contentsline {subsection}{Modern Fortran Explained}{14}{subsection*.7}
+\contentsline {subsection}{Other books}{16}{subsection*.8}
+\contentsline {subsection}{subroutine}{17}{subsection*.9}
+\contentsline {subsection}{Derived Types}{17}{subsection*.10}
+\contentsline {subsection}{Generic Procedures}{19}{subsection*.11}
+\contentsline {section}{\numberline {3.5}Elemental Procedures}{20}{section.3.5}
+\contentsline {section}{\numberline {3.6}linux}{21}{section.3.6}
+\contentsline {section}{\numberline {3.7}C++}{21}{section.3.7}
+\contentsline {chapter}{\numberline {4}Latex}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1} MacTeX 配置中文支持}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}texmaker}{23}{section.4.2}
+\contentsline {subsection}{short cut}{23}{subsection*.12}
+\contentsline {section}{\numberline {4.3}compile latex using terminal}{23}{section.4.3}
+\contentsline {section}{\numberline {4.4}Latex + sublime}{24}{section.4.4}
+\contentsline {chapter}{\numberline {5}Lyx}{31}{chapter.5}
+\contentsline {subsection}{Setting up LyX to work with XeTeX}{31}{subsection*.13}
+\contentsline {paragraph}{Setting up XeTeX for CJK scripts}{31}{paragraph*.14}
+\contentsline {subsection}{LyX + LaTeX}{31}{subsection*.15}
+\contentsline {subsection}{input “nameoflayout.layput” into the lyx and “nameofclass.cls” into latex}{32}{subsection*.16}
+\contentsline {chapter}{\numberline {6}Tools}{33}{chapter.6}
+\contentsline {section}{\numberline {6.1}sublime}{33}{section.6.1}
+\contentsline {section}{\numberline {6.2}git and github}{34}{section.6.2}
+\contentsline {subsection}{git and visual studio code}{36}{subsection*.17}
+\contentsline {section}{\numberline {6.3}Terminal}{37}{section.6.3}
+\contentsline {section}{\numberline {6.4}Shell}{41}{section.6.4}
+\contentsline {chapter}{\numberline {7}MKL}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}Set the permanently environment variables}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}Using MKL}{44}{section.7.2}
+\contentsline {chapter}{\numberline {8}西方哲学}{45}{chapter.8}
+\contentsline {section}{\numberline {8.1}第一时期：自然秩序}{45}{section.8.1}
+\contentsline {section}{\numberline {8.2}智者派和苏格拉底}{46}{section.8.2}
+\contentsline {chapter}{\numberline {9}install owncloud on ubuntu}{47}{chapter.9}
+\contentsline {subsection}{Update server and set it with a static IP address}{47}{subsection*.18}
+\contentsline {subsection}{Installing Apache,PHP and MySQL}{48}{subsection*.19}
+\contentsline {subsection}{Change PHP max upload limit}{48}{subsection*.20}
+\contentsline {subsection}{Create the Database}{48}{subsection*.21}
+\contentsline {subsection}{Install ownCloud}{49}{subsection*.22}
+\contentsline {chapter}{\numberline {10}Blender}{51}{chapter.10}
+\contentsline {section}{\numberline {10.1}The python file for moving object}{52}{section.10.1}
+\contentsfinish 
