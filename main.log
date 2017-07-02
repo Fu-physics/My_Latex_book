@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.5.22)  2 JUL 2017 12:19
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.5.22)  2 JUL 2017 12:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2320,20 +2320,107 @@ Overfull \hbox (202.4985pt too wide) in paragraph at lines 788--788
 *************************************************
 * fontspec warning: "addfontfeatures-ignored"
 * 
-* \addfontfeature(s) ignored on line 826; it cannot be used with a font that
+* \addfontfeature(s) ignored on line 825; it cannot be used with a font that
 * wasn't selected by a fontspec command.
 * 
 * The current font is "\T1/lmr/m/n/10 ".
 * The requested feature is "LetterSpace=10".
 *************************************************
 [36]
-Overfull \hbox (13.49905pt too wide) in paragraph at lines 850--850
+Overfull \hbox (13.49905pt too wide) in paragraph at lines 849--849
 []\T1/lmtt/m/n/10 $ git remote add origin git@github.com:mjhea0/git-commands.gi
 t[] 
  []
 
+! Illegal parameter number in definition of \@currentlabelname.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
 
-Overfull \hbox (97.49881pt too wide) in paragraph at lines 892--892
+! Illegal parameter number in definition of \ttl@savemark.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \ttl@savetitle.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \ttl@savewrite.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \ttl@savewrite.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \Hy@tempa.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \Hy@tempa.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+! Illegal parameter number in definition of \Hy@gtemp.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+
+Overfull \hbox (1.67639pt too wide) in paragraph at lines 853--853
+|\T1/lmr/m/it/10.95 git and vi-sual stu-dio code[][]$\T1/lmtt/m/it/10.95 http :
+ / / mherman . org / blog / 2013 / 10 /
+ []
+
+! Illegal parameter number in definition of \reserved@a.
+<to be read again> 
+                   .
+l.853 .../10/11/basic-git-commands/#.WVkg28aZMfE}}
+                                                  
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
+
+Overfull \hbox (97.49881pt too wide) in paragraph at lines 893--893
 []\T1/lmtt/m/n/10 Shows the hierarchical arrangement contents of a directory : 
 $ tree [dir_name][] 
  []
@@ -2341,56 +2428,56 @@ $ tree [dir_name][]
 *************************************************
 * fontspec warning: "addfontfeatures-ignored"
 * 
-* \addfontfeature(s) ignored on line 892; it cannot be used with a font that
+* \addfontfeature(s) ignored on line 893; it cannot be used with a font that
 * wasn't selected by a fontspec command.
 * 
 * The current font is "\T1/lmr/m/n/10 ".
 * The requested feature is "LetterSpace=10".
 *************************************************
 [37]
-Overfull \hbox (2.99908pt too wide) in paragraph at lines 892--892
+Overfull \hbox (2.99908pt too wide) in paragraph at lines 893--893
 []\T1/lmtt/m/n/10 Dump the contents of a file to the screen: $ cat [file name][
 ] 
  []
 
 
-Overfull \hbox (44.99896pt too wide) in paragraph at lines 905--905
+Overfull \hbox (44.99896pt too wide) in paragraph at lines 906--906
 []\T1/lmtt/m/n/10 -a show all file ( including hidden files - those beginning w
 ith . )[] 
  []
 
 
-Overfull \hbox (2.99908pt too wide) in paragraph at lines 917--917
+Overfull \hbox (2.99908pt too wide) in paragraph at lines 918--918
 []\T1/lmtt/m/n/10 target is a directory: copy source and place it in directory[
 ] 
  []
 
 
-Overfull \hbox (81.74886pt too wide) in paragraph at lines 917--917
+Overfull \hbox (81.74886pt too wide) in paragraph at lines 918--918
 []\T1/lmtt/m/n/10 target is a new name: copy source and contents into directory
  with new name[] 
  []
 
 
-Overfull \hbox (2.99908pt too wide) in paragraph at lines 917--917
+Overfull \hbox (2.99908pt too wide) in paragraph at lines 918--918
 []\T1/lmtt/m/n/10 target is a directory: copy source and place it in directory[
 ] 
  []
 
 
-Overfull \hbox (86.99884pt too wide) in paragraph at lines 930--930
+Overfull \hbox (86.99884pt too wide) in paragraph at lines 931--931
 []\T1/lmtt/m/n/10 target is an existing dir: source directory is moved inside t
 arget directory[] 
  []
 
 
-Overfull \hbox (8.24907pt too wide) in paragraph at lines 930--930
+Overfull \hbox (8.24907pt too wide) in paragraph at lines 931--931
 []\T1/lmtt/m/n/10 target is a new name: source directory is renamed to new name
 [] 
  []
 
 
-Overfull \hbox (60.74892pt too wide) in paragraph at lines 930--930
+Overfull \hbox (60.74892pt too wide) in paragraph at lines 931--931
 []\T1/lmtt/m/n/10 target is an existing dir: source file is moved inside target
  directory[] 
  []
@@ -2398,26 +2485,26 @@ Overfull \hbox (60.74892pt too wide) in paragraph at lines 930--930
 *************************************************
 * fontspec warning: "addfontfeatures-ignored"
 * 
-* \addfontfeature(s) ignored on line 940; it cannot be used with a font that
+* \addfontfeature(s) ignored on line 931; it cannot be used with a font that
 * wasn't selected by a fontspec command.
 * 
 * The current font is "\T1/lmr/m/n/10 ".
 * The requested feature is "LetterSpace=10".
 *************************************************
 [38]
-Overfull \hbox (23.99902pt too wide) in paragraph at lines 957--957
+Overfull \hbox (23.99902pt too wide) in paragraph at lines 958--958
 []\T1/lmtt/m/n/10 The ps command shows currently running processes: $ ps [optio
 ns][] 
  []
 
 
-Overfull \hbox (81.74886pt too wide) in paragraph at lines 957--957
+Overfull \hbox (81.74886pt too wide) in paragraph at lines 958--958
 []\T1/lmtt/m/n/10 The top command displays real-time system resources usage:  $
  top [options][] 
  []
 
 
-Overfull \hbox (71.24889pt too wide) in paragraph at lines 965--965
+Overfull \hbox (71.24889pt too wide) in paragraph at lines 966--966
 []\T1/lmtt/m/n/10 The kill command can generate a signal to the process specifi
 ed by a PID.[] 
  []
@@ -2425,26 +2512,26 @@ ed by a PID.[]
 *************************************************
 * fontspec warning: "addfontfeatures-ignored"
 * 
-* \addfontfeature(s) ignored on line 990; it cannot be used with a font that
+* \addfontfeature(s) ignored on line 988; it cannot be used with a font that
 * wasn't selected by a fontspec command.
 * 
 * The current font is "\T1/lmr/m/n/10 ".
 * The requested feature is "LetterSpace=10".
 *************************************************
 [39]
-Overfull \hbox (8.24907pt too wide) in paragraph at lines 1011--1011
+Overfull \hbox (8.24907pt too wide) in paragraph at lines 1012--1012
 []\T1/lmtt/m/n/10 # side by side comparison with screen width of 180 characters
 [] 
  []
 
 
-Overfull \hbox (14.05453pt too wide) in paragraph at lines 1026--1027
+Overfull \hbox (14.05453pt too wide) in paragraph at lines 1027--1028
 \T1/lmtt/m/n/10 terminal-[]vs-[]bash$[][] \T1/lmr/m/n/10 and [][]$\T1/lmtt/m/n/
 10 http : / / stackoverflow . com / questions / 733824 /
  []
 
 
-Overfull \hbox (6.52686pt too wide) in paragraph at lines 1026--1027
+Overfull \hbox (6.52686pt too wide) in paragraph at lines 1027--1028
 \T1/lmtt/m/n/10 how-[]to-[]run-[]a-[]shell-[]script-[]on-[]a-[]unix-[]console-[
 ]or-[]mac-[]terminal$[][]\T1/lmr/m/n/10 . 
  []
@@ -2462,7 +2549,7 @@ Overfull \hbox (6.52686pt too wide) in paragraph at lines 1026--1027
 *************************************************
 * fontspec warning: "addfontfeatures-ignored"
 * 
-* \addfontfeature(s) ignored on line 1043; it cannot be used with a font that
+* \addfontfeature(s) ignored on line 1044; it cannot be used with a font that
 * wasn't selected by a fontspec command.
 * 
 * The current font is "\T1/lmr/m/n/10 ".
@@ -2473,79 +2560,79 @@ Overfull \hbox (6.52686pt too wide) in paragraph at lines 1026--1027
 ]
 Chapter 7.
 
-Overfull \hbox (107.99878pt too wide) in paragraph at lines 1060--1060
+Overfull \hbox (107.99878pt too wide) in paragraph at lines 1061--1061
 []\T1/lmtt/m/n/10 declare -x CPATH="/opt/intel/compilers_and_libraries_2017.2.1
 63/mac/mkl/include:[] 
  []
 
 
-Overfull \hbox (107.99878pt too wide) in paragraph at lines 1060--1060
+Overfull \hbox (107.99878pt too wide) in paragraph at lines 1061--1061
 []\T1/lmtt/m/n/10 /opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include
 /intel64_mac/ilp64"[] 
  []
 
 
-Overfull \hbox (176.24858pt too wide) in paragraph at lines 1060--1060
+Overfull \hbox (176.24858pt too wide) in paragraph at lines 1061--1061
 []\T1/lmtt/m/n/10 declare -x DYLD_LIBRARY_PATH="/opt/intel/compilers_and_librar
 ies_2017.2.163/mac/compiler/lib:[] 
  []
 
 
-Overfull \hbox (76.49887pt too wide) in paragraph at lines 1060--1060
+Overfull \hbox (76.49887pt too wide) in paragraph at lines 1061--1061
 []\T1/lmtt/m/n/10 declare -x MKLROOT="/opt/intel/compilers_and_libraries_2017.2
 .163/mac/mkl"[] 
  []
 
 
-Overfull \hbox (181.49857pt too wide) in paragraph at lines 1060--1060
+Overfull \hbox (181.49857pt too wide) in paragraph at lines 1061--1061
 []\T1/lmtt/m/n/10 declare -x NLSPATH="/opt/intel/compilers_and_libraries_2017.2
 .163/mac/mkl/lib/locale/%l_%t/%N"[] 
  []
 
 
-Overfull \hbox (155.24864pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (155.24864pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 export DYLD_LIBRARY_PATH="/opt/intel/compilers_and_libraries_
 2017.2.163/mac/compiler/lib:[] 
  []
 
 [43]
-Overfull \hbox (128.99872pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (128.99872pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 export LIBRARY_PATH="/opt/intel/compilers_and_libraries_2017.
 2.163/mac/compiler/lib:[] 
  []
 
 
-Overfull \hbox (86.99884pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (86.99884pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 export CPATH="/opt/intel/compilers_and_libraries_2017.2.163/m
 ac/mkl/include:[] 
  []
 
 
-Overfull \hbox (107.99878pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (107.99878pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 /opt/intel/compilers_and_libraries_2017.2.163/mac/mkl/include
 /intel64_mac/ilp64"[] 
  []
 
 
-Overfull \hbox (55.49893pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (55.49893pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 export MKLROOT="/opt/intel/compilers_and_libraries_2017.2.163
 /mac/mkl"[] 
  []
 
 
-Overfull \hbox (160.49863pt too wide) in paragraph at lines 1099--1099
+Overfull \hbox (160.49863pt too wide) in paragraph at lines 1100--1100
 []\T1/lmtt/m/n/10 export NLSPATH="/opt/intel/compilers_and_libraries_2017.2.163
 /mac/mkl/lib/locale/%l_%t/%N"[] 
  []
 
 
-Overfull \hbox (120.52652pt too wide) in paragraph at lines 1111--1112
+Overfull \hbox (120.52652pt too wide) in paragraph at lines 1112--1113
 \T1/lmtt/m/n/10 intel . com / en-[]us / articles / intel-[]math-[]kernel-[]libr
 ary-[]intel-[]mkl-[]2017-[]getting-[]started$[][]\T1/lmr/m/n/10 . 
  []
 
 
-Overfull \hbox (221.79472pt too wide) in paragraph at lines 1125--1126
+Overfull \hbox (221.79472pt too wide) in paragraph at lines 1126--1127
 []$[]$ 
  []
 
@@ -2862,12 +2949,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 111.
  ) 
 Here is how much of TeX's memory you used:
- 29321 strings out of 493591
- 539162 string characters out of 6143546
+ 29323 strings out of 493591
+ 539190 string characters out of 6143546
  581336 words of memory out of 5000000
- 32327 multiletter control sequences out of 15000+600000
- 88504 words of font info for 84 fonts, out of 8000000 for 9000
+ 32328 multiletter control sequences out of 15000+600000
+ 88823 words of font info for 85 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 63i,12n,72p,10423b,961s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,11n,72p,10423b,961s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on main.pdf (57 pages).
