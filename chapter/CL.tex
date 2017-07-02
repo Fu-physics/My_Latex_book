@@ -702,9 +702,10 @@ command + shift + P 打开命令行| Command prompt
 
 
 
-\section{git and github}\footnote{\url{https://git-scm.com/book/zh/v2/Git-基础-远程仓库的使用}}
+\section{git and github}
 
 \begin{verbatim}
+https://git-scm.com/book/zh/v2/Git-基础-远程仓库的使用
 
 $ git init
 该命令将创建一个名为 .git 的子目录，这个子目录含有你初始化的 
@@ -790,7 +791,7 @@ $ git push origin master
 
 \paragraph*{Initializing}
 
-As you probably know, Git is a version control system, which allows you to save snapshots of your projects into repositories. Before you can start taking snapshots though, you have to establish a repository by either creating one from scratch or by copying an already established repository.
+As you probably know, Git is a version control system, which allows you to save snapshots of your projects into repositories. Before you can start taking snapshots though, you have to establish a repository by either creating one from scratch or by copying an already established repository. \url{http://mherman.org/blog/2013/10/11/basic-git-commands/#.WVkg28aZMfE}
 
 \begin{verbatim}
 $git init 
@@ -845,13 +846,28 @@ Before you can push, you must add a remote repository to share your local reposi
 
 \begin{verbatim}
 $ git remote add origin git@github.com:mjhea0/git-commands.git
-$ git push origin master
+$ git push -f origin master           %force push
 \end{verbatim}
 
 
 
-\subsection{git and visual studio code\url{http://mherman.org/blog/2013/10/11/basic-git-commands/#.WVkg28aZMfE}}
+\subsection{git and visual studio code}
 
+\begin{verbatim}
+git init .
+git add --all
+git commit -am "the notation for this version"
+git remote add url
+git remote set-url origin new url
+git push -f origin master
+\end{verbatim}
+
+
+1. After the inital setting, everytime you change the file, you could see the noation at left side of VS code.  At the \textbf{change} side, you could add all files to stage by click the "$+$". Or you just want add one file by clicking "$+$" beside with that file. 
+
+2. type the notation for this revised version, \textit{Command} $+$ \textit{Enter} to commit all those files that you added
+
+3. you could use \textbf{push to} to push the remote
 
 
 
