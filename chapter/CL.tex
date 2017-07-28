@@ -5,9 +5,11 @@
 \section{blender}
 
 Open the blender in the terminal as 
+\begin{tcolorbox}
 \begin{verbatim}
 /Applications/blender/blender.app/Contents/MacOS/blender
 \end{verbatim}
+\end{tcolorbox}
 So the system console works.
 
 \begin{itemize}
@@ -40,7 +42,7 @@ the procession will take 20-30 mins.
 
 \section{python}
 
-Using pypy 
+\subsection{Using pypy }
 \begin{verbatim}
 At the command line, instead of:
 python my_program.py
@@ -48,6 +50,96 @@ python my_program.py
 Use:
 path/to/where/you/installed/pypy my_program.py
 \end{verbatim}
+
+\subsection{Install pacakge in anaconda}
+
+\begin{verbatim}
+$which conda
+$/Users/fuli/anaconda/bin/pip install pacakge
+\end{verbatim}
+
+\subsection{numpy}
+
+\textbf{numpy.loadtxt} loads csv file to an array \footnote{\url{https://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html}}
+
+\begin{tcolorbox} 
+\begin{verbatim}
+numpy.loadtxt(open("test.csv", "rb"), delimiter=",", skiprows=1)
+\end{verbatim} 
+\end{tcolorbox}
+
+
+\textbf{numpy.savetxt} saves an array to a csv text file.\footnote{\url{https://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html}}
+
+\begin{tcolorbox} 
+	\begin{verbatim}
+	import numpy
+	a = numpy.asarray([ [1,2,3], [4,5,6], [7,8,9] ])
+	numpy.savetxt("foo.csv", a, delimiter=",")
+	\end{verbatim} 
+\end{tcolorbox}
+
+Transfermation fo np.array 
+
+\begin{tcolorbox} 
+	\begin{verbatim}
+import numpy as np
+np.array([])    # create a blank array
+np.array(list)  # Transfer list fo np.array 
+np.append(a, b)  #append a np.array with b np.array
+	\end{verbatim} 
+\end{tcolorbox}
+
+\subsection{pandas}
+
+\textbf{Merge, join, and concatenate}\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/merging.html}}
+
+\begin{tcolorbox} 
+	\begin{verbatim}
+In [1]: df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2', 'A3'],
+...:                     'B': ['B0', 'B1', 'B2', 'B3'],
+...:                     'C': ['C0', 'C1', 'C2', 'C3'],
+...:                     'D': ['D0', 'D1', 'D2', 'D3']},
+...:                     index=[0, 1, 2, 3])
+...: 
+
+In [2]: df2 = pd.DataFrame({'A': ['A4', 'A5', 'A6', 'A7'],
+...:                     'B': ['B4', 'B5', 'B6', 'B7'],
+...:                     'C': ['C4', 'C5', 'C6', 'C7'],
+...:                     'D': ['D4', 'D5', 'D6', 'D7']},
+...:                      index=[4, 5, 6, 7])
+...: 
+
+In [3]: df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'],
+...:                     'B': ['B8', 'B9', 'B10', 'B11'],
+...:                     'C': ['C8', 'C9', 'C10', 'C11'],
+...:                     'D': ['D8', 'D9', 'D10', 'D11']},
+...:                     index=[8, 9, 10, 11])
+...: 
+
+In [5]: result_vertical_append = pd.concat([df1, df2, df3])    
+
+In [6]: result_horizental_append = pd.concat([df1, df4], axis=1, join_axes=[df1.index])
+
+	\end{verbatim} 
+\end{tcolorbox}
+
+
+
+\textbf{Create DataFrame}\footnote{\url{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}}
+you need to specify data, index and columns to DataFrame constructor, as in:
+\begin{tcolorbox} 
+	\begin{verbatim}
+pd.DataFrame(data=data[1:,1:],    # values
+                      index=data[1:,0],    # 1st column as index
+                      columns=data[0,1:])  # 1st row as the column names
+	\end{verbatim} 
+\end{tcolorbox}
+
+
+
+
+
 
 \section{Fortran}
 
@@ -956,7 +1048,7 @@ Commonly used options
 	-f    ignore nonexistent files, never prompt
 \end{verbatim}
 
-\begin{Verbatim}
+\begin{verbatim}
 The scp command allows transfers to remote locations without using a GUI. 
 
 $ scp [[user@]host1:]filename1 [[user@]host2:]filena2
@@ -965,7 +1057,7 @@ $ scp myfile1 user@ada.tamu.edu
 $ scp myfile1 user@ada.tamu.edu:/scratch/user/[NetID]
 $ scp user@ada.tamu.edu:myfile2 ~/Desktop/newFileName
 $ scp -r user@ada.tamu.edu:dir3 local_dir/  (recursive) 
-\end{Verbatim}
+\end{verbatim}
 
 \begin{verbatim}
 The ps command shows currently running processes: $ ps [options]
@@ -996,7 +1088,7 @@ $ . .bash_profile
 \end{verbatim}
 
 
-\begin{Verbatim}
+\begin{verbatim}
 $ find [target dir] [expression]
 
 $ find . -name "*.txt" -print
@@ -1008,7 +1100,7 @@ $ find /scratch/user_NetID -mtime +2  -print
 $ find /scratch/user_NetID -mtime -7  -print
  
 $ find /tmp -user user_NetID -print
-\end{Verbatim}
+\end{verbatim}
 
 \begin{verbatim}
 $ diff [options] FILES

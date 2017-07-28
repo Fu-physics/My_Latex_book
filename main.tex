@@ -14,6 +14,10 @@
 \usepackage{babel}
 \usepackage{xcolor}
 
+
+%%%%%%%%%%  tcolorbox can also draw boxes around verbatim text %%%
+\usepackage{tcolorbox}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  including the \maketitle %%%%%%%%%%%%%%%%%%
 \usepackage{ifxetex}
 \ifxetex
@@ -92,6 +96,18 @@
 				\item 因为有中文，因此编译环境必须是xelatex
 			\end{itemize}
 \end{itemize}
+
+\textbf{Box the verbatim}
+\begin{tcolorbox} 
+\begin{verbatim}
+	begin{tcolorbox} 
+	begin{verbatim}
+	...
+	...
+	end{verbatim} 
+	end{tcolorbox}
+\end{verbatim}
+\end{tcolorbox}
 
 \input{chapter/co2.tex}
 \input{chapter/CL.tex}
